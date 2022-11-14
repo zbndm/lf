@@ -15,7 +15,7 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
     };
   };
   
-  var v = JSON.stringify(_, getCircularReplacer(),4);
+  var v = JSON.stringify(_, getCircularReplacer());
 
 
   await fetch("https://api.logflare.app/api/logs?api_key=9dvsKv4uoB1u&source=09148cf7-b8a4-4f3d-bb83-c20115287dca", {
