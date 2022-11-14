@@ -2,7 +2,20 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(_: NextApiRequest, res: NextApiResponse) {
 
-
+  const getCircularReplacer = () => {
+    const seen = new WeakSet();
+    return (key, value) => {
+      if (typeof value === "object" && value !== null) {
+        if (seen.has(value)) {
+          return;
+        }
+        seen.add(value);
+      }
+      return value;
+    };
+  };
+  
+  var v = JSON.stringify(_, getCircularReplacer());
 
 
   await fetch("https://api.logflare.app/api/logs?api_key=9dvsKv4uoB1u&source=09148cf7-b8a4-4f3d-bb83-c20115287dca", {
@@ -14,7 +27,7 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
             body: JSON.stringify({
            
             log_entry: 'XXXX',
-            metadata: {x:[_]}
+            metadata: {x:[v]}
         })
         })
 
