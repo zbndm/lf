@@ -15,7 +15,7 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
     };
   };
   
-  var v = JSON.stringify(_, getCircularReplacer());
+  var v = JSON.stringify(_, getCircularReplacer(),4);
 
 
   await fetch("https://api.logflare.app/api/logs?api_key=9dvsKv4uoB1u&source=09148cf7-b8a4-4f3d-bb83-c20115287dca", {
@@ -27,7 +27,7 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
             body: JSON.stringify({
            
             log_entry: 'XXXX',
-            metadata: {x:[v]}
+            metadata: v
         })
         })
 
